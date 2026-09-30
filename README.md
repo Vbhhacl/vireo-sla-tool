@@ -107,6 +107,14 @@ The repo includes the supplied data and policy PDF; raw inputs should not be edi
    python -m pytest -q
    ```
 
+## Deploy on Streamlit Community Cloud
+1. Create a new app from the public repository `Vbhhacl/vireo-sla-tool`.
+2. Select branch `main` and main file path `app.py`.
+3. Use the available app URL slug `vireo-sla-tool-83j4jnw8um8vy5adqwvcpe` (the resulting URL is `https://vireo-sla-tool-83j4jnw8um8vy5adqwvcpe.streamlit.app`).
+4. No secrets or API keys are required. Cloud installs packages from `requirements.txt` and reads the committed data/report CSVs.
+
+**Public-data warning:** this repository and deployed app are public. Ticket/customer text and source data can be viewed through the repository and Ticket Explorer. Deploy only if the supplied data is approved for public access; otherwise make the repository private and confirm the hosting plan supports the desired access controls before deployment.
+
 ## Outputs
 The pipeline writes the following artifacts:
 - data/clean_tickets.csv

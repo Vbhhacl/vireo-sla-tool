@@ -211,7 +211,7 @@ def render_topbar(tickets: pd.DataFrame) -> dict[str, list[str]]:
                 selected = st.selectbox(label, options, key=key, label_visibility="visible")
                 current[label.lower()] = values if selected == "All" else [selected]
         with second_row[2]:
-            st.button("Reset filters", key="reset_filters", on_click=reset_global_filters, use_container_width=True)
+            st.button("Reset filters", key="reset_filters", on_click=reset_global_filters, width="stretch")
     return current
 
 
@@ -247,7 +247,7 @@ def show_agent_dialog(profile: dict[str, Any], trend: pd.DataFrame) -> None:
     if not trend.empty:
         fig = go.Figure(go.Scatter(x=trend["week_start"], y=trend["breach_rate"] * 100, mode="lines+markers", line={"color": "#68d4c9", "shape": "spline"}))
         fig.update_layout(yaxis_title="Weekly breach rate (%)", xaxis_title=None)
-        st.plotly_chart(configure_plot(fig, 230), use_container_width=True)
+        st.plotly_chart(configure_plot(fig, 230), width="stretch")
     st.caption("Contextual workload measure only; not a performance ranking.")
 
 
@@ -276,7 +276,7 @@ def render_timeline(tickets: pd.DataFrame, key: str = "timeline") -> None:
         st.session_state[window_key] = (week_strings[0], week_strings[-1])
     window = st.select_slider("Time window · week starting", options=week_strings, key=window_key)
     window_tickets = tickets[tickets["week_start"].dt.strftime("%Y-%m-%d").between(window[0], window[1])]
-    selection = st.plotly_chart(timeline_figure(window_tickets), use_container_width=True, key=key, on_select="rerun", selection_mode="points")
+    selection = st.plotly_chart(timeline_figure(window_tickets), width="stretch", key=key, on_select="rerun", selection_mode="points")
     weekly = weekly_analysis(window_tickets)
     if weekly.empty:
         return
@@ -324,7 +324,7 @@ def render_shift_lanes(tickets: pd.DataFrame) -> None:
             f"<div class='lane' style='--intensity:{intensity:.2f}'><div class='lane-name'>{str(row['roster_shift']).upper()}</div><div class='lane-rate'>{row['breach_rate']:.1%}</div><div class='lane-meta'>{int(row['breaches']):,} breaches · {int(row['tickets']):,} tickets<br>Median {row['median_response_minutes']:.0f} min · P90 {row['p90_response_minutes']:.0f} min</div><div class='lane-track'><div class='lane-fill' style='width:{fill:.1f}%'></div></div><div class='lane-meta'>{elevated_weeks}/{week_count} recent weeks above filtered baseline<br><b>{week_count}-week pattern</b> · volume-scaled lane</div></div>",
             unsafe_allow_html=True,
         )
-        if col.button(f"Focus {row['roster_shift']}", key=f"focus_{row['roster_shift']}", use_container_width=True):
+        if col.button(f"Focus {row['roster_shift']}", key=f"focus_{row['roster_shift']}", width="stretch"):
             set_pending_shift(str(row["roster_shift"]))
             st.rerun()
 
@@ -365,7 +365,7 @@ def render_agent_lens(tickets: pd.DataFrame) -> None:
         hovertemplate="%{y}<br>Week %{x}<br>Rate %{z:.1f}%<br>Tickets %{customdata[0]}<br>Breaches %{customdata[1]}<br>Median %{customdata[2]:.0f} min<extra></extra>",
     ))
     fig.update_layout(title="Agent × week breach-rate matrix", xaxis_title=None, yaxis_title=None, xaxis={"tickangle": -45, "dtick": max(1, len(heat.columns) // 14)}, yaxis={"autorange": "reversed"})
-    st.plotly_chart(configure_plot(fig, max(430, len(heat.index) * 23)), use_container_width=True)
+    st.plotly_chart(configure_plot(fig, max(430, len(heat.index) * 23)), width="stretch")
     agents = grouped[["agent_id", "agent_name"]].drop_duplicates().sort_values("agent_name")
     options = {f"{row.agent_name} · {row.agent_id}": row.agent_id for row in agents.itertuples()}
     selected_agent = st.selectbox("Inspect agent profile", ["Select an agent…", *options.keys()], key="agent_profile_select")
@@ -409,7 +409,7 @@ def render_ticket_explorer(tickets: pd.DataFrame) -> None:
     display["created_at"] = pd.to_datetime(display["created_at"], utc=True).dt.tz_convert("Asia/Kolkata").dt.strftime("%d %b %Y %H:%M")
     display = display.rename(columns={"ticket_id": "Ticket", "sla_breached": "SLA status", "roster_shift": "Shift", "channel": "Channel", "response_minutes": "Response (min)", "sla_threshold_minutes": "SLA target (min)", "agent_id": "Agent", "category": "Category", "priority": "Priority", "created_at": "Created (IST)"})
     st.caption(f"Showing {len(display):,} records in the result preview · full incident detail opens only on selection")
-    st.dataframe(display, hide_index=True, use_container_width=True, height=390)
+    st.dataframe(display, hide_index=True, width="stretch", height=390)
     ids = results["ticket_id"].astype(str).tolist()
     selected_id = st.selectbox("Open incident", ["Select a ticket…", *ids], key="ticket_detail_select")
     if selected_id != "Select a ticket…":
@@ -444,14 +444,14 @@ def render_ai_insights(tickets: pd.DataFrame, data: dict[str, Any]) -> None:
         breakdown = [row for row in evidence if row.get("type") in {"category", "channel"}]
         if breakdown:
             st.markdown("**EVIDENCE**")
-            st.dataframe(pd.DataFrame(breakdown), hide_index=True, use_container_width=True)
+            st.dataframe(pd.DataFrame(breakdown), hide_index=True, width="stretch")
         elif evidence:
             st.markdown("**EVIDENCE**")
-            st.dataframe(pd.DataFrame(evidence), hide_index=True, use_container_width=True)
+            st.dataframe(pd.DataFrame(evidence), hide_index=True, width="stretch")
         priority_evidence = next((row.get("distribution") for row in evidence if row.get("type") == "priority"), None)
         if priority_evidence:
             st.markdown("**PRIORITY MIX**")
-            st.dataframe(pd.DataFrame(priority_evidence), hide_index=True, use_container_width=True)
+            st.dataframe(pd.DataFrame(priority_evidence), hide_index=True, width="stretch")
         with st.expander("How was this calculated?"):
             st.write("The current global filter state is applied to ticket-level rows on the server. Counts and rates are grouped from the same filtered set. SLA breaches were calculated upstream against channel-specific thresholds. No LLM generates or changes numerical values.")
             st.json({"filtered_tickets": answer["source_count"], "breaches": answer["breach_count"], "evidence_rows": evidence})
@@ -461,7 +461,7 @@ def render_ai_insights(tickets: pd.DataFrame, data: dict[str, Any]) -> None:
     if themes.empty:
         st.info("No stable text themes are available.")
     else:
-        st.dataframe(themes.rename(columns={"theme_id": "Theme", "tickets": "Messages", "share": "Share", "top_terms": "Terms", "example_message": "Example"}), hide_index=True, use_container_width=True)
+        st.dataframe(themes.rename(columns={"theme_id": "Theme", "tickets": "Messages", "share": "Share", "top_terms": "Terms", "example_message": "Example"}), hide_index=True, width="stretch")
     ai_report = data["ai_validation"]
     st.caption(f"Keyword sample output coverage: {float(ai_report.get('keyword_label_coverage_rate', 0)):.1%}; semantic accuracy: not measured (no human-labeled benchmark).")
 
@@ -504,7 +504,7 @@ def render_data_quality(data: dict[str, Any], tickets: pd.DataFrame) -> None:
         else:
             status = "REVIEW" if warning_on_nonzero and bool(value) else "PASS"
         rows.append({"Check": name, "Result": status, "Value": str(value), "Details": str(detail)})
-    st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True)
+    st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
     with st.expander("Validation report details"):
         st.json(report)
     with st.expander("Roster assignment audit"):
@@ -559,7 +559,7 @@ def main() -> None:
             cats = category_analysis(active).head(7)
             fig = go.Figure(go.Bar(x=cats["breaches"], y=cats["category"], orientation="h", marker_color="#54bdb4", customdata=cats[["tickets", "breach_rate"]], hovertemplate="%{y}<br>Breaches %{x}<br>Tickets %{customdata[0]}<br>Rate %{customdata[1]:.1%}<extra></extra>"))
             fig.update_layout(yaxis={"autorange": "reversed"}, xaxis_title="Breached tickets", title="Largest category counts")
-            st.plotly_chart(configure_plot(fig, 280), use_container_width=True)
+            st.plotly_chart(configure_plot(fig, 280), width="stretch")
         with right:
             st.markdown("### Analyst readout")
             insight = build_ai_insight(active, "Why are SLA breaches increasing?")
@@ -570,13 +570,13 @@ def main() -> None:
         st.title("SLA Timeline")
         st.caption("Weekly breach rate recalculated from the current shared filter state. The dotted line is the proposed 15% pilot goal, not a policy threshold.")
         render_timeline(active, key="timeline_page")
-        st.dataframe(weekly_analysis(active).assign(breach_rate=lambda frame: frame["breach_rate"].map(lambda value: f"{value:.1%}")), hide_index=True, use_container_width=True)
+        st.dataframe(weekly_analysis(active).assign(breach_rate=lambda frame: frame["breach_rate"].map(lambda value: f"{value:.1%}")), hide_index=True, width="stretch")
     elif page == "Shift Intelligence":
         st.markdown("<div class='eyebrow'>02 / Which shifts?</div>", unsafe_allow_html=True)
         st.title("Shift Intelligence")
         st.caption("Volume-scaled lanes show burden, response distribution, and recent pattern relative to the filtered baseline.")
         render_shift_lanes(active)
-        st.dataframe(shift_analysis(active).assign(breach_rate=lambda frame: frame["breach_rate"].map(lambda value: f"{value:.1%}")), hide_index=True, use_container_width=True)
+        st.dataframe(shift_analysis(active).assign(breach_rate=lambda frame: frame["breach_rate"].map(lambda value: f"{value:.1%}")), hide_index=True, width="stretch")
     elif page == "Agent Lens":
         st.markdown("<div class='eyebrow'>03 / Which agents · workload context, not ranking</div>", unsafe_allow_html=True)
         st.title("Agent Lens")
