@@ -1,0 +1,29 @@
+{
+  "model_used": "local TF-IDF + KMeans theme discovery; keyword tags are a heuristic baseline",
+  "keyword_sample_size": 80,
+  "label_distribution": {
+    "delivery/order issue": 41,
+    "other": 20,
+    "product fault": 8,
+    "refund/payment": 5,
+    "warranty": 3,
+    "account/payment": 2,
+    "promotion": 1
+  },
+  "missing_or_invalid_labels": 0,
+  "keyword_label_coverage_rate": 1.0,
+  "unclassified_or_other_count": 20,
+  "semantic_accuracy": null,
+  "semantic_accuracy_note": "Not measured: no independently human-labeled reference set is included.",
+  "human_review_required": true,
+  "common_failure_modes": [
+    "generic messages without a clear root cause",
+    "multiple issue types in one note",
+    "TF-IDF themes are exploratory and need human interpretation"
+  ],
+  "cost_per_run_usd": 0.0,
+  "cost_per_month_usd": 0.0,
+  "text_rows_analyzed_for_themes": 11169,
+  "text_rows_excluded_from_themes": 31,
+  "theme_count": 5
+}

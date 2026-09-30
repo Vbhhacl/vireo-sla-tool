@@ -1,0 +1,66 @@
+EMAIL THREAD â€” Vireo Audio â€” support tickets (Set D)
+Messages exchanged before this pack was sent. Provided as-is.
+========================================================================
+
+From: Neha Kulkarni, Support Operations Manager, Vireo Audio
+To: Kabir Nanda, Account Lead (our side)
+Cc: Priya Raman; Arjun Mehta; Sameer Qureshi
+Date: Mon 7 Sep 2026, 10:30
+Subject: SLA breach report
+
+Kabir - breach report by agent and shift, weekly. I want to have the conversation with
+the right people and I want the numbers to hand when I do. Sameer is sending the export
+plus the roster.
+
+------------------------------------------------------------------------
+
+From: Sameer Qureshi, Helpdesk Administrator (IT), Vireo Audio
+To: Kabir Nanda, Account Lead (our side)
+Cc: Priya Raman; Arjun Mehta; Neha Kulkarni
+Date: Mon 7 Sep 2026, 13:45
+Subject: Re: SLA breach report
+
+Attached. Important: this export came from the helpdesk API and is in UTC - I did not
+convert it. Shift definitions in the policy doc are IST. The roster has one row per
+assignment with from/to dates because people move around; a few moved in June. Some
+tickets appear twice from the migration re-import and legacy rows have csat 0 where the
+new system leaves it blank. About forty messages are failed IVR transcripts.
+
+------------------------------------------------------------------------
+
+From: Arjun Mehta, Finance Controller, Vireo Audio
+To: Neha Kulkarni, Support Operations Manager, Vireo Audio
+Cc: Priya Raman; Sameer Qureshi; Kabir Nanda
+Date: Tue 8 Sep 2026, 09:05
+Subject: Re: SLA breach report
+
+Headcount is frozen till Q4, so whatever this shows the answer cannot be 'hire'.
+Separately, the SLA credit line in the P&L has roughly tripled since last summer and
+nobody has explained it to me yet. Not saying it's related.
+
+------------------------------------------------------------------------
+
+From: Priya Raman, Head of Customer Experience, Vireo Audio
+To: Neha Kulkarni, Support Operations Manager, Vireo Audio
+Cc: Arjun Mehta; Sameer Qureshi; Kabir Nanda
+Date: Tue 8 Sep 2026, 14:20
+Subject: Re: SLA breach report
+
+The morning chat team are demoralised - they open the day to a wall of red and it's not
+clear to me they can do anything about it. Please don't build something that makes that
+worse. For what it's worth the credits look flat to me month on month, it's CSAT that
+moved.
+
+------------------------------------------------------------------------
+
+From: Neha Kulkarni, Support Operations Manager, Vireo Audio
+To: Kabir Nanda, Account Lead (our side)
+Cc: Priya Raman; Arjun Mehta; Sameer Qureshi
+Date: Wed 9 Sep 2026, 08:50
+Subject: Re: SLA breach report
+
+Morning team is the bulk of the breaches, that's just the fact, and the Indore reshuffle
+in June was cost-neutral by Arjun's own numbers. Report by agent and shift please.
+Weekly. Nothing fancy.
+
+------------------------------------------------------------------------

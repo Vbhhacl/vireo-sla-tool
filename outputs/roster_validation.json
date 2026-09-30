@@ -1,0 +1,11 @@
+{
+  "zero_match_cases": 1,
+  "multiple_match_cases": 0,
+  "unique_match_count_distribution": {
+    "0": 1,
+    "1": 11199
+  },
+  "zero_match_ticket_ids": [
+    "TK-242818"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "summary": {
+    "raw_rows": 11816,
+    "clean_rows": 11200,
+    "duplicate_ticket_ids": 616,
+    "unique_ticket_ids_clean": 11200,
+    "status": "warning"
+  },
+  "checks": [
+    {
+      "name": "duplicate_ticket_ids",
+      "passed": true,
+      "details": {
+        "duplicate_ticket_ids": 616,
+        "duplicated_rows": 1232
+      }
+    },
+    {
+      "name": "invalid_timestamps",
+      "passed": true,
+      "details": {
+        "invalid_created_at": 0,
+        "invalid_first_response_at": 0
+      }
+    },
+    {
+      "name": "first_response_before_created",
+      "passed": true,
+      "details": {
+        "count": 0
+      }
+    },
+    {
+      "name": "resolution_timestamp_validation",
+      "passed": false,
+      "details": {
+        "missing_resolved_at": 589
+      }
+    },
+    {
+      "name": "missing_critical_fields",
+      "passed": false,
+      "details": {
+        "columns_with_missing_values": [
+          "order_id"
+        ]
+      }
+    },
+    {
+      "name": "unexpected_status_values",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "unexpected_channel_values",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "invalid_priority_values",
+      "passed": true,
+      "details": []
+    },
+    {
+      "name": "impossible_csat_values",
+      "passed": false,
+      "details": {
+        "count": 1730
+      }
+    },
+    {
+      "name": "suspicious_negative_refund_values",
+      "passed": true,
+      "details": {
+        "count": 0
+      }
+    }
+  ]
+}
