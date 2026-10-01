@@ -1,34 +1,33 @@
 # Three-minute screen-recording script
 
-Record the screen directly; do not use slides. Keep Vireo Pulse, generated reports, and terminal evidence visible as you move through the product.
+**Recording:** screen capture only; no slides. The text in quotation marks is a read-aloud script. Bracketed text is an on-screen cue, not spoken narration. Keep the pace conversational; this is about 330 words.
 
-**0:00–0:25 — Prompt and scope**
-- Say the core prompt in one sentence: “Build a small reliable AI-assisted SLA tool from the supplied README, policy, and data; report weekly shift/agent burden, business impact, validation, and limitations.”
-- Mention the follow-up constraint: use the policy as source of truth and do not state unsupported causes as facts.
-- State the proposed pilot goal visible in the app: reduce the measured 21.8% breach rate to 15% in four weeks; 15% is a test target, not a historical result.
+## 0:00–0:25 — Prompt and scope
+[Show the Vireo Pulse Command Center.]
 
-**0:25–0:50 — Data and policy pipeline**
-- Show the input data and support policy, then the pipeline command/output.
-- Explain deduplication, UTC-to-IST conversion, roster-window matching, and channel-specific response thresholds.
-- Note that 1 of 11,200 tickets is unmatched to the roster and is surfaced as REVIEW.
+“ I started with this request: build a small, reliable AI-assisted SLA tool from the supplied README, policy, and data, and show the breach pattern, business impact, validation, and limitations. I then emphasized two constraints: the support policy is the source of truth, and the data must not be used to claim unsupported causes. ”
 
-**0:50–1:35 — Command Center and shared filters**
-- Show the SLA Pulse: 11,200 tickets, 2,440 breaches, 21.8%, and Rs 854,000 estimated policy exposure.
-- Show Morning's 2,018/2,440 breaches (82.7%) and 32.2% rate, explicitly calling it concentration, not causality or an agent verdict.
-- Open Shift Intelligence and click “Focus Morning”; show the global filter and filtered analysis update.
-- Explain the quarter arithmetic: (21.7857% - 15%) x 650 tickets/week x 13 weeks x Rs 350 ≈ Rs 200,700 potential exposure reduction, not guaranteed savings.
+## 0:25–0:55 — What the numbers say
+[Point to the SLA Pulse and shift spotlight.]
 
-**1:35–2:05 — Investigation and AI evidence**
-- Open Agent Lens to show the weekly breach-rate matrix, then Ticket Explorer to search and inspect a ticket incident.
-- Open AI Insights. Explain local TF-IDF/KMeans themes and the deterministic evidence readout; all numeric values are computed from the active filter state, with no LLM inventing metrics.
-- State semantic accuracy is unknown because there is no human-labeled benchmark; no paid API is used.
+“ The cleaned dataset contains 11,200 tickets and 2,440 first-response breaches: 21.79 percent. At the policy’s 350-rupee credit per breach, that is 854,000 rupees of estimated exposure—not audited savings. Morning has 2,018 breaches, or 82.7 percent of all breaches, with a 32.2 percent breach rate. That is concentration in the data, not proof that the shift or its agents caused the breaches. ”
 
-**2:05–2:35 — What changed and what was discarded**
-- Version 1 was a static KPI/trend/table with a fixed explanation. It was replaced after review with Vireo Pulse: a data-derived shift spotlight, shared filters, investigation views, evidence panel, and local ML text themes.
-- Say what was discarded: punitive “worst agent” framing, unsupported causal claims about transfers/staffing, and an external paid LLM/chatbot because they were not needed to answer the operations question and would add cost/dependency.
-- Be clear that local clustering is still exploratory, not a validated root-cause engine.
+## 0:55–1:25 — Explore and filter
+[Open Shift Intelligence; click “Focus Morning”; show the filtered result.]
 
-**2:35–3:00 — Validation and close**
-- Show Data Quality and generated validation artifacts; show terminal evidence that nine regression tests pass and the pipeline completes.
-- State the limits: 0 missing/invalid keyword labels is output coverage only, not semantic correctness; credit exposure is policy-based, not audited payout; pilot impact must be measured after implementation.
-- End with the actionable question: test queue balancing around the Morning-shift workload and review the same metrics after four weeks.
+“ These filters are shared across the views. Selecting Morning updates the analysis to 6,264 tickets and a 32.2 percent breach rate. The proposed four-week pilot target is 15 percent; it is a test target, not a historical result. At 650 tickets per week, the quarter scenario is: the 6.7857 percentage-point reduction times 8,450 tickets times 350 rupees—about 200,700 rupees of potential exposure reduction, not guaranteed cash savings. ”
+
+## 1:25–2:00 — Investigate and explain
+[Show Agent Lens, Ticket Explorer, then AI Insights.]
+
+“ Agent Lens shows weekly rates with workload context rather than a punitive ranking. Ticket Explorer lets me search and inspect the underlying message, notes, response time, policy threshold, and roster assignment. The text themes use local TF-IDF and K-means clustering, with a keyword baseline. There is no external LLM, no Mistral call, and no API cost. The themes are exploratory—not verified root causes—and their semantic accuracy has not been measured. ”
+
+## 2:00–2:30 — What changed and what I discarded
+[Show Data Quality and the generated validation report.]
+
+“ The first dashboard was a static KPI and table view. I replaced it with Vireo Pulse’s shared filters, shift lanes, agent-week matrix, ticket investigation, evidence panel, and data-quality view. I discarded chatbot behavior, paid or free external LLM calls, causal claims about staffing or transfers, and ‘worst agent’ rankings. They were unnecessary for this decision or unsupported by this observational data. ”
+
+## 2:30–3:00 — Validation and handoff
+[Briefly show test results, then the public repository README.]
+
+“ Nine regression tests pass, covering SLA thresholds, time zones, data handling, text-theme reproducibility, and shared filtering. That checks software behavior; it does not prove the AI themes are semantically correct. One ticket has no roster match, and the source also has data-quality warnings, so those need review. The next step is to validate the 15 percent target with operations, run a four-week queue-balancing pilot, and compare the same measures afterward. ”
